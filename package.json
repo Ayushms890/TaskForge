@@ -1,0 +1,32 @@
+{
+  "name": "taskforge",
+  "private": true,
+  "version": "0.1.0",
+  "description": "TaskForge project management application",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "db:generate": "node scripts/prisma.mjs generate",
+    "db:migrate": "node scripts/prisma.mjs migrate dev",
+    "db:deploy": "node scripts/prisma.mjs migrate deploy",
+    "db:status": "node scripts/prisma.mjs migrate status",
+    "test:scripts": "node --test scripts/processes.test.mjs",
+    "test:integration": "node scripts/test-integration.mjs",
+    "test:e2e": "node scripts/test-integration.mjs --e2e",
+    "build": "npm run build --workspace @taskforge/api && npm run build --workspace @taskforge/web",
+    "lint": "npm run lint --workspace @taskforge/api && npm run lint --workspace @taskforge/web",
+    "typecheck": "npm run typecheck --workspace @taskforge/api && npm run typecheck --workspace @taskforge/web",
+    "format:check": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@playwright/test": "^1.64.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.44.0"
+  }
+}

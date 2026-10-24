@@ -1,0 +1,30 @@
+import cors from "cors";
+import express from "express";
+import helmet from "helmet";
+import { env } from "./config/env.js";
+import { errorHandler } from "./middleware/error-handler.js";
+import { protectOrigin } from "./middleware/protect-origin.js";
+import { authRouter } from "./routes/auth.routes.js";
+import { healthRouter } from "./routes/health.routes.js";
+import { workspaceRouter } from "./routes/workspace.routes.js";
+import { projectRouter } from "./routes/project.routes.js";
+import { taskRouter } from "./routes/task.routes.js";
+import { sprintRouter } from "./routes/sprint.routes.js";
+import { commentRouter } from "./routes/comment.routes.js";
+
+export const app = express();
+
+app.disable("x-powered-by");
+app.set("trust proxy", env.TRUST_PROXY);
+app.use(helmet());
+app.use(cors({ origin: env.WEB_ORIGIN, credentials: true }));
+app.use(protectOrigin);
+app.use(express.json({ limit: "1mb" }));
+app.use("/api/health", healthRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/workspaces", workspaceRouter);
+app.use("/api", projectRouter);
+app.use("/api/tasks", taskRouter);
+app.use("/api", sprintRouter);
+app.use("/api", commentRouter);
+app.use(errorHandler);

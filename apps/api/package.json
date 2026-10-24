@@ -1,0 +1,47 @@
+{
+  "name": "@taskforge/api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "db:generate": "node ../../scripts/prisma.mjs generate",
+    "db:migrate": "node ../../scripts/prisma.mjs migrate dev",
+    "db:deploy": "node ../../scripts/prisma.mjs migrate deploy",
+    "db:status": "node ../../scripts/prisma.mjs migrate status",
+    "db:push": "node ../../scripts/prisma.mjs db push",
+    "test": "vitest run",
+    "test:integration": "node ../../scripts/test-integration.mjs"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.16.2",
+    "bcryptjs": "^3.0.3",
+    "cookie": "^0.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie": "^0.6.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.5.2",
+    "@types/supertest": "^7.2.1",
+    "eslint": "^9.36.0",
+    "prisma": "^6.16.2",
+    "supertest": "^7.3.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "^5.0.3"
+  }
+}
